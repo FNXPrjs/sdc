@@ -67,8 +67,6 @@ export const EventsLogList: React.FC<IResourceComponentsProps> = () => {
                 rows={rows}
                 // {...restDataGridProps}
                 paginationMode={paginationMode}
-                // paginationModel={paginationModel}
-                // onPaginationModelChange={onPaginationModelChange}
                 autoHeight
             />
         </List>

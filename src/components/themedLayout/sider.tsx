@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   CanAccess,
   ITreeMenu,
@@ -36,6 +36,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Paper from "@mui/material/Paper";
 import Tooltip from "@mui/material/Tooltip";
 import type { RefineThemedLayoutV2SiderProps } from "@refinedev/mui";
+import { ColorModeContext } from "../../contexts/color-mode";
 
 export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
   Title: TitleFromProps,
@@ -375,6 +376,7 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
   const items = renderTreeView(menuItems, selectedKey);
 
   const renderSider = () => {
+
     if (render) {
       return render({
         dashboard,
@@ -404,6 +406,8 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
       {renderSider()}
     </List>
   );
+
+  const { mode } = useContext(ColorModeContext);
 
   return (
     <>
@@ -494,7 +498,10 @@ export const ThemedSiderV2: React.FC<RefineThemedLayoutV2SiderProps> = ({
           >
             <RenderToTitle collapsed={siderCollapsed} />
             {!siderCollapsed && (
-              <IconButton size="small" onClick={() => setSiderCollapsed(true)}>
+              <IconButton 
+                size="small" 
+                onClick={() => setSiderCollapsed(true)}
+                color={mode === "dark" ? ("secondary") : ("primary")}>
                 {<ChevronLeft />}
               </IconButton>
             )}

@@ -7,7 +7,7 @@ import React, {
   useState,
 } from "react";
 
-import { SDCLightTheme } from "../../design";
+import { SDCLightTheme, SDCDarkTheme } from "../../design";
 
 
 
@@ -54,7 +54,7 @@ export const ColorModeContextProvider: React.FC<PropsWithChildren> = ({
     >
       <ThemeProvider
         // you can change the theme colors here. example: mode === "light" ? RefineThemes.Magenta : RefineThemes.MagentaDark
-        theme={mode === "light" ? SDCLightTheme : SDCLightTheme} //RefineThemes.BlueDark}
+        theme={mode === "light" ? SDCLightTheme : SDCDarkTheme} //RefineThemes.BlueDark}
       >
         {children}
       </ThemeProvider>

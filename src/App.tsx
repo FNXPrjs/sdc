@@ -1,4 +1,4 @@
-import { Authenticated, GitHubBanner, Refine } from "@refinedev/core";
+import { Authenticated, Refine } from "@refinedev/core";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 
 import {
@@ -6,7 +6,7 @@ import {
   notificationProvider,
   RefineSnackbarProvider,
   // ThemedLayoutV2,
-  RefineThemes
+  // RefineThemes
 } from "@refinedev/mui";
 
 // import CssBaseline from "@mui/material/CssBaseline";
