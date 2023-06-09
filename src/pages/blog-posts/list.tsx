@@ -28,7 +28,13 @@ export const BlogPostList: React.FC<IResourceComponentsProps> = () => {
       },
   });
 
-  const columns = React.useMemo<GridColumns<any>>(
+  const {
+    paginationMode,
+    rows,
+    ...restDataGridProps
+    } = dataGridProps;
+
+  const columns = React.useMemo<GridColumns>(
       () => [
           {
               field: "id",
@@ -111,7 +117,13 @@ export const BlogPostList: React.FC<IResourceComponentsProps> = () => {
 
   return (
       <List>
-          <DataGrid {...dataGridProps} columns={columns} autoHeight />
+          {/* <DataGrid {...dataGridProps} columns={columns} autoHeight /> */}
+          <DataGrid
+                columns={columns}
+                rows={rows}
+                paginationMode={paginationMode}
+                autoHeight
+            />
       </List>
   );
 };

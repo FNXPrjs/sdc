@@ -7,20 +7,26 @@
 import React from "react";
 import {
     useDataGrid,
-    // EditButton,
-    // ShowButton,
-    // DeleteButton,
+    EditButton,
+    ShowButton,
+    DeleteButton,
     List,
     DateField,
 } from "@refinedev/mui";
-import { DataGrid, GridColDef, GridColumns } from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { IResourceComponentsProps, useTranslate } from "@refinedev/core";
 
 export const EventsLogList: React.FC<IResourceComponentsProps> = () => {
     const translate = useTranslate();
     const { dataGridProps } = useDataGrid();
 
-    const columns = React.useMemo<GridColumns<any>>(
+    const {
+        paginationMode,
+        rows,
+        ...restDataGridProps
+    } = dataGridProps;
+
+    const columns = React.useMemo<GridColDef[]>(
         () => [
             {
                 field: "id",
@@ -55,7 +61,16 @@ export const EventsLogList: React.FC<IResourceComponentsProps> = () => {
 
     return (
         <List>
-            <DataGrid {...dataGridProps} columns={columns} autoHeight />
+            {/* <DataGrid {...dataGridProps} columns={columns} autoHeight /> */}
+            <DataGrid
+                columns={columns}
+                rows={rows}
+                // {...restDataGridProps}
+                paginationMode={paginationMode}
+                // paginationModel={paginationModel}
+                // onPaginationModelChange={onPaginationModelChange}
+                autoHeight
+            />
         </List>
     );
 };
