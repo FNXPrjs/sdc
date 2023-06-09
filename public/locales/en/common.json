@@ -139,22 +139,40 @@
       "show": "Show Category"
     }
   },
+  "events": {
+    "events": "Super Events",
+    "fields": {
+      "id": "Id",
+      "title": "Title",
+      "date": "Created At",
+      "type": "Status"
+    }
+  },
   "documentTitle": {
-    "default": "refine",
-    "suffix": " | refine",
+    "default": "SDC",
+    "suffix": " | SDC",
     "blog_posts": {
-      "list": "Blog Posts | refine",
-      "show": "#{{id}} Show Blog Post | refine",
-      "edit": "#{{id}} Edit Blog Post | refine",
-      "create": "Create new Blog Post | refine",
-      "clone": "#{{id}} Clone Blog Post | refine"
+      "list": "Blog Posts | SDC",
+      "show": "#{{id}} Show Blog Post | SDC",
+      "edit": "#{{id}} Edit Blog Post | SDC",
+      "create": "Create new Blog Post | SDC",
+      "clone": "#{{id}} Clone Blog Post | SDC"
     },
     "categories": {
-      "list": "Categories | refine",
-      "show": "#{{id}} Show Category | refine",
-      "edit": "#{{id}} Edit Category | refine",
-      "create": "Create new Category | refine",
-      "clone": "#{{id}} Clone Category | refine"
+      "list": "Categories | SDC",
+      "show": "#{{id}} Show Category | SDC",
+      "edit": "#{{id}} Edit Category | SDC",
+      "create": "Create new Category | SDC",
+      "clone": "#{{id}} Clone Category | SDC"
+    },
+    "rail-map": {
+      "list": "Rail Map | SDC"
+    },
+    "events": {
+      "list": "Events | SDC"
+    },
+    "settings": {
+      "list": "Settings | SDC"
     }
   },
   "table": {

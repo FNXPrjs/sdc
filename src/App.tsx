@@ -5,11 +5,18 @@ import {
   ErrorComponent,
   notificationProvider,
   RefineSnackbarProvider,
-  ThemedLayoutV2,
+  // ThemedLayoutV2,
+  RefineThemes
 } from "@refinedev/mui";
 
-import CssBaseline from "@mui/material/CssBaseline";
-import GlobalStyles from "@mui/material/GlobalStyles";
+// import CssBaseline from "@mui/material/CssBaseline";
+// import GlobalStyles from "@mui/material/GlobalStyles";
+import { CssBaseline, GlobalStyles, ThemeProvider } from "@mui/material";
+import {
+  Settings,
+} from "@mui/icons-material";
+import MapIcon from '@mui/icons-material/Map';
+
 import routerBindings, {
   CatchAllNavigate,
   DocumentTitleHandler,
@@ -18,9 +25,9 @@ import routerBindings, {
 } from "@refinedev/react-router-v6";
 import dataProvider from "@refinedev/simple-rest";
 import { useTranslation } from "react-i18next";
-import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { authProvider } from "./authProvider";
-import { Header } from "./components/header";
+// import { Header } from "./components/header";
 import { ColorModeContextProvider } from "./contexts/color-mode";
 import {
   BlogPostCreate,
@@ -38,6 +45,15 @@ import { ForgotPassword } from "./pages/forgotPassword";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
 
+import { EventsLogList, settings, RailMap } from "./pages";
+
+import { ThemedLayoutV2 } from "./components/themedLayout";
+import { ThemedHeaderV2 } from "./components/themedLayout/header";
+import { ThemedSiderV2 } from "./components/themedLayout/sider";
+import { ThemedTitleV2 } from "./components/themedLayout/title";
+import { MuiInferencer } from "@refinedev/inferencer/mui";
+
+
 function App() {
   const { t, i18n } = useTranslation();
 
@@ -48,8 +64,8 @@ function App() {
   };
 
   return (
+    
     <BrowserRouter>
-      <GitHubBanner />
       <RefineKbarProvider>
         <ColorModeContextProvider>
           <CssBaseline />
@@ -63,25 +79,41 @@ function App() {
               i18nProvider={i18nProvider}
               resources={[
                 {
-                  name: "blog_posts",
-                  list: "/blog-posts",
-                  create: "/blog-posts/create",
-                  edit: "/blog-posts/edit/:id",
-                  show: "/blog-posts/show/:id",
-                  meta: {
-                    canDelete: true,
-                  },
+                  name: "rail-map",
+                  icon: <MapIcon />,
+                  options: { label: "Map" },
+                  list: MuiInferencer,
                 },
                 {
-                  name: "categories",
-                  list: "/categories",
-                  create: "/categories/create",
-                  edit: "/categories/edit/:id",
-                  show: "/categories/show/:id",
-                  meta: {
-                    canDelete: true,
-                  },
+                  name: "events",
+                  options: { label: "Events Log" },
+                  list: "/events-log",
                 },
+                {
+                  name: "settings",
+                  list: MuiInferencer,
+                  icon: <Settings />,
+                },
+                // {
+                //   name: "blog_posts",
+                //   list: "/blog-posts",
+                //   create: "/blog-posts/create",
+                //   edit: "/blog-posts/edit/:id",
+                //   show: "/blog-posts/show/:id",
+                //   meta: {
+                //     canDelete: true,
+                //   },
+                // },
+                // {
+                //   name: "categories",
+                //   list: "/categories",
+                //   create: "/categories/create",
+                //   edit: "/categories/edit/:id",
+                //   show: "/categories/show/:id",
+                //   meta: {
+                //     canDelete: true,
+                //   },
+                // },
               ]}
               options={{
                 syncWithLocation: true,
@@ -92,7 +124,14 @@ function App() {
                 <Route
                   element={
                     <Authenticated fallback={<CatchAllNavigate to="/login" />}>
-                      <ThemedLayoutV2 Header={() => <Header sticky />}>
+                      {/* <ThemedLayoutV2 Header={() => <Header sticky />}>
+                        <Outlet />
+                      </ThemedLayoutV2> */}
+                      <ThemedLayoutV2
+                          Header={ThemedHeaderV2}
+                          Sider={ThemedSiderV2}
+                          Title={ThemedTitleV2}
+                      >
                         <Outlet />
                       </ThemedLayoutV2>
                     </Authenticated>
@@ -100,8 +139,13 @@ function App() {
                 >
                   <Route
                     index
-                    element={<NavigateToResource resource="blog_posts" />}
+                    element={<Navigate to="rail-map" />}
+                    // element={<NavigateToResource resource="blog_posts" />}
                   />
+                  <Route
+                    path="/events-log">
+                    <Route index element={<EventsLogList />} />
+                  </Route>
                   <Route path="/blog-posts">
                     <Route index element={<BlogPostList />} />
                     <Route path="create" element={<BlogPostCreate />} />
@@ -114,6 +158,11 @@ function App() {
                     <Route path="edit/:id" element={<CategoryEdit />} />
                     <Route path="show/:id" element={<CategoryShow />} />
                   </Route>
+
+                  <Route
+                      path="/rail-map"
+                      element={<RailMap />}
+                  />
                   <Route path="*" element={<ErrorComponent />} />
                 </Route>
                 <Route
